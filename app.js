@@ -21,6 +21,8 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   const { status, message } = errorHandler(err);
+  // const { status, message } = err;
+  // console.log(err);
   res.status(status).json({ message });
 });
 
