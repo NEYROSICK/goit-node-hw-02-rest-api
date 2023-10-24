@@ -3,11 +3,11 @@ const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 
 const register = async (req, res, next) => {
-  console.log(req.body.password);
+  console.log(req.body);
   // if (!Object.keys(req.body).length) {
   //   throw requestError(400, "Missing fields");
   // }
-  req.body.password = await bcrypt.hash(req.body.password, 10);
+  // req.body.password = await bcrypt.hash(req.body.password, 10);
 
   const user = await User.create(req.body);
   console.log(user);
