@@ -1,11 +1,15 @@
 const User = require("../../models/user");
 const requestError = require("../../helpers/requestError");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+require("dotenv").config();
+const secret = process.env.secret;
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email: email });
+  const user = await User.findOne({ email });
   if (!user) {
     throw requestError(401, "Email is wrong");
   }
@@ -15,7 +19,18 @@ const login = async (req, res, next) => {
     throw requestError(401, "Password is wrong");
   }
 
-  return res.status(200).json({ message: "all good)" });
+  const payload = { id: user.id };
+  const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+
+  const response = {
+    token,
+    user: {
+      email: user.email,
+      subscrittion: user.subscription,
+    },
+  };
+
+  return res.status(200).json(response);
 };
 
 module.exports = login;
