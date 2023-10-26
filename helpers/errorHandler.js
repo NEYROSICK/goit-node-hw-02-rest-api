@@ -1,4 +1,5 @@
 const errorHandler = (err) => {
+  console.log(err);
   if (err.message.includes("ENOENT")) {
     return { status: 500, message: "Internal Server Error" };
   } else if (err.kind === "ObjectId") {

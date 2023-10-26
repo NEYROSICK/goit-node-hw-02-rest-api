@@ -22,6 +22,8 @@ const login = async (req, res, next) => {
   const payload = { id: user.id };
   const token = jwt.sign(payload, secret, { expiresIn: "1h" });
 
+  await User.findOneAndUpdate({ email }, { token });
+
   const response = {
     token,
     user: {
