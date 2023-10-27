@@ -9,6 +9,11 @@ const secret = process.env.secret;
 
 const authorization = async (req, res, next) => {
   const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    throw requestError(401);
+  }
+
   const token = authHeader.split(" ")[1];
 
   const { id } = jwt.verify(token, secret, {}, (err, data) => {
