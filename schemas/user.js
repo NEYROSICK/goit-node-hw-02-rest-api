@@ -11,4 +11,8 @@ const authSchema = joi.object({
     .required(),
 });
 
-module.exports = authSchema;
+const subSchema = joi.object({
+  subscription: joi.string().valid("starter", "pro", "business").required(),
+});
+
+module.exports = { authSchema, subSchema };
