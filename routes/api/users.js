@@ -12,6 +12,7 @@ router.patch(
   authorization,
   ctrlUser.updateSubscription
 );
+
 router.post("/register", validate(user.authSchema), ctrlAuth.register);
 router.post("/login", validate(user.authSchema), ctrlAuth.login);
 router.post("/logout", authorization, ctrlAuth.logout);
