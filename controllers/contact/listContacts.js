@@ -9,7 +9,8 @@ const listContacts = async (req, res, next) => {
     throw requestError(400, "Out of range request");
   }
 
-  const query = {};
+  const query = { owner: req.user.id };
+
   if (favorite) {
     query.favorite = favorite;
   }

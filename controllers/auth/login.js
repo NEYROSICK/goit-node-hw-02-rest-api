@@ -9,6 +9,10 @@ const secret = process.env.secret;
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
+  // if (!req.headers.authorization) {
+  //   throw requestError(401, "Already authorized. Log out first");
+  // }
+
   const user = await User.findOne({ email });
   if (!user) {
     throw requestError(401, "Email is wrong");
