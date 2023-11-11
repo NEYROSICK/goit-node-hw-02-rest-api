@@ -9,6 +9,7 @@ const secret = process.env.secret;
 
 const authorization = async (req, res, next) => {
   const authHeader = req.headers.authorization;
+  console.log(authHeader);
 
   if (!authHeader) {
     throw requestError(401);

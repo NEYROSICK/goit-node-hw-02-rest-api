@@ -5,10 +5,8 @@ const updateSubscription = async (req, res, next) => {
 
   const result = await User.findByIdAndUpdate(id, req.body, {
     new: true,
-    select: "-password -token -_id -createdAt -updatedAt",
+    select: "email subscription -_id",
   });
-
-  console.log(result);
 
   res.status(200).json(result);
 };

@@ -19,6 +19,10 @@ const login = async (req, res, next) => {
     throw requestError(401, "Password is wrong");
   }
 
+  if (!user.verify) {
+    throw requestError(401, "Email is not verified");
+  }
+
   const payload = { id: user.id };
   const token = jwt.sign(payload, secret, { expiresIn: "1h" });
 
@@ -28,7 +32,7 @@ const login = async (req, res, next) => {
     token,
     user: {
       email: user.email,
-      subscrittion: user.subscription,
+      subscription: user.subscription,
     },
   };
 
